@@ -15,6 +15,7 @@
 		C3886F1E23414170007F0ABF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C3886F1C23414170007F0ABF /* LaunchScreen.storyboard */; };
 		C3886F2923414170007F0ABF /* SwiftlyBallsToTheWallTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3886F2823414170007F0ABF /* SwiftlyBallsToTheWallTests.swift */; };
 		C3886F3423414170007F0ABF /* SwiftlyBallsToTheWallUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3886F3323414170007F0ABF /* SwiftlyBallsToTheWallUITests.swift */; };
+		C3886F422341583B007F0ABF /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3886F412341583B007F0ABF /* MainMenuScene.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		C3886F2F23414170007F0ABF /* SwiftlyBallsToTheWallUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SwiftlyBallsToTheWallUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3886F3323414170007F0ABF /* SwiftlyBallsToTheWallUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftlyBallsToTheWallUITests.swift; sourceTree = "<group>"; };
 		C3886F3523414170007F0ABF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C3886F412341583B007F0ABF /* MainMenuScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuScene.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +103,7 @@
 			children = (
 				C3886F0D2341416E007F0ABF /* AppDelegate.swift */,
 				C3886F132341416E007F0ABF /* GameScene.swift */,
+				C3886F412341583B007F0ABF /* MainMenuScene.swift */,
 				C3886F152341416E007F0ABF /* GameViewController.swift */,
 				C3886F172341416E007F0ABF /* Main.storyboard */,
 				C3886F1A23414170007F0ABF /* Assets.xcassets */,
@@ -261,6 +264,7 @@
 			files = (
 				C3886F142341416E007F0ABF /* GameScene.swift in Sources */,
 				C3886F162341416E007F0ABF /* GameViewController.swift in Sources */,
+				C3886F422341583B007F0ABF /* MainMenuScene.swift in Sources */,
 				C3886F0E2341416E007F0ABF /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

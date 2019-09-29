@@ -22,10 +22,11 @@ class GameScene: SKScene {
     override func didMove(to view: SKView){
         createText()
         createShapes()
-        nonTexturedSpriteNodeSecond.addChild(texturedSpriteNode)
+        //nonTexturedSpriteNodeSecond.addChild(texturedSpriteNode)
         nonTexturedSpriteNodeFirst.addChild(nonTexturedSpriteNodeSecond)
         firstNode.addChild(nonTexturedSpriteNodeFirst)
-        addChild(firstNode)
+        self.addChild(firstNode)
+        self.addChild(texturedSpriteNode)
         
         firstNode.position = CGPoint(x: self.frame.midX, y:self.frame.midY)
         nonTexturedSKSpriteNodes()
