@@ -16,6 +16,7 @@ class MainMenuScene: SKScene {
     var mainMenuTitle: SKLabelNode!
     var tapToPlay: SKLabelNode!
     var highScoreText: SKLabelNode!
+    var lastRoundScore: SKLabelNode!
     
     
     override func didMove(to view: SKView){
@@ -49,7 +50,7 @@ class MainMenuScene: SKScene {
         mainMenuTitle.text = "Balls To The Wall"
         mainMenuTitle.fontSize = 32.0
         //mainMenuTitle.fontName = "AvenirNext-Bold"
-        mainMenuTitle.position = CGPoint(x: self.frame.midX, y: self.frame.midY+100)
+        mainMenuTitle.position = CGPoint(x: self.frame.midX, y: self.frame.midY+50)
         mainMenuTitle.fontColor = UIColor.white
         self.addChild(mainMenuTitle)
         
@@ -63,9 +64,17 @@ class MainMenuScene: SKScene {
         
         mainMenuTitle = SKLabelNode()
         mainMenuTitle.text = "HighScore: " + String(UserDefaults.standard.integer(forKey: "highScore"))
-        mainMenuTitle.fontSize = 32.0
+        mainMenuTitle.fontSize = 25.0
         //mainMenuTitle.fontName = "AvenirNext-Bold"
         mainMenuTitle.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        mainMenuTitle.fontColor = UIColor.white
+        self.addChild(mainMenuTitle)
+        
+        mainMenuTitle = SKLabelNode()
+        mainMenuTitle.text = "Previous Game's Score: " + String(UserDefaults.standard.integer(forKey: "roundScore"))
+        mainMenuTitle.fontSize = 13.0
+        //mainMenuTitle.fontName = "AvenirNext-Bold"
+        mainMenuTitle.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 75)
         mainMenuTitle.fontColor = UIColor.white
         self.addChild(mainMenuTitle)
     }

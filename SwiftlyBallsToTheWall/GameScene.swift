@@ -23,6 +23,7 @@ class GameScene: SKScene {
     var inLock: Bool = false
     var colorMatched: Bool = false
     var gameOver: Bool = false
+    var gameOverLock: Bool = false
     
     //0 - red, 1 - yellow, 2 - green, 3 - blue
     var rotTrack: Int = 0
@@ -33,10 +34,10 @@ class GameScene: SKScene {
     let rotateRightAction = SKAction.rotate(byAngle: CGFloat((Float.pi * 90)/180), duration: 0.3)
     let rotateLeftAction = SKAction.rotate(byAngle: CGFloat((Float.pi * -90)/180), duration: 0.3)
     
-    let turnRed = SKAction.colorize(with: UIColor.red, colorBlendFactor: CGFloat(1), duration: 0.3)
-    let turnYellow = SKAction.colorize(with: UIColor.yellow, colorBlendFactor: CGFloat(1), duration: 0.3)
-    let turnBlue = SKAction.colorize(with: UIColor.blue, colorBlendFactor: CGFloat(1), duration: 0.3)
-    let turnGreen = SKAction.colorize(with: UIColor.green, colorBlendFactor: CGFloat(1), duration: 0.3)
+    let turnRed = SKAction.colorize(with: UIColor(red: 0.835,green: 0.267, blue: 0.267, alpha: 1.0), colorBlendFactor: CGFloat(1), duration: 0.3)
+    let turnYellow = SKAction.colorize(with: UIColor(red: 0.902,green: 1.0, blue: 0.302, alpha: 1.0), colorBlendFactor: CGFloat(1), duration: 0.3)
+    let turnGreen = SKAction.colorize(with: UIColor(red: 0.267,green: 0.835, blue: 0.267, alpha: 1.0), colorBlendFactor: CGFloat(1), duration: 0.3)
+    let turnBlue = SKAction.colorize(with: UIColor(red: 0.267,green: 0.494, blue: 0.835, alpha: 1.0), colorBlendFactor: CGFloat(1), duration: 0.3)
     let ballFadeOut = SKAction.fadeAlpha(by: -1.0, duration: 0.3)
     let ballFadeIn = SKAction.fadeAlpha(by: 1.0, duration: 0.3)
     
@@ -49,12 +50,12 @@ class GameScene: SKScene {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if (gameOver){
-            let newScene = MainMenuScene(size: (self.view?.bounds.size)!)
-            let transition = SKTransition.reveal(with: .up, duration: 2)
-            self.view?.presentScene(newScene, transition: transition)
-            transition.pausesOutgoingScene = true
-        }
+        //if (gameOver){
+        //    let newScene = MainMenuScene(size: (self.view?.bounds.size)!)
+        //    let transition = SKTransition.reveal(with: .up, duration: 2)
+        //    self.view?.presentScene(newScene, transition: transition)
+        //    transition.pausesOutgoingScene = true
+        //}
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?){
@@ -80,6 +81,16 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        
+        if (gameOver){
+            if (!gameOverLock && fadeLock && !gameBall.hasActions()){
+                let newScene = MainMenuScene(size: (self.view?.bounds.size)!)
+                let transition = SKTransition.reveal(with: .up, duration: 2)
+                self.view?.presentScene(newScene, transition: transition)
+                transition.pausesOutgoingScene = true
+                gameOverLock = true
+            }
+        }
         
         if (gameBall.position.y == (self.frame.minY + 150)){
             if (!fadeLock){
