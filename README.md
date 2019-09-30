@@ -17,6 +17,7 @@ How To Play:
 Controls:
 ----------
  Tap on the right side of the screen = rotate ring clockwise 
+ 
  Tap on the left side of the screen  = rotate ring anti-clockwise
 
 ![gameplay](https://github.com/henry9836/BallsToTheWall/blob/master/Resources/game.gif)
