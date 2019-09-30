@@ -14,8 +14,14 @@ class MainMenuScene: SKScene {
     let left = SKSpriteNode()
     let right = SKSpriteNode()
     
+    var logo: SKSpriteNode!
+    var mainMenuTitle: SKLabelNode!
+    
     override func didMove(to view: SKView){
-        self.backgroundColor = UIColor.gray
+        //self.backgroundColor = UIColor.gray
+        createText()
+        createShapes()
+        
         
         left.color = UIColor.red
         left.size = CGSize(width: 64, height: 64)
@@ -46,5 +52,24 @@ class MainMenuScene: SKScene {
             transition.pausesOutgoingScene = true
         }
     }
+    
+    func createShapes(){
+        logo = SKSpriteNode(texture: SKTexture(imageNamed: "logo"), size: CGSize(width: 100, height:100))
+        logo.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
+        self.addChild(logo)
+        
+    }
+    
+    func createText(){
+        mainMenuTitle = SKLabelNode()
+        mainMenuTitle.text = "Balls To The Wall"
+        mainMenuTitle.fontSize = 32.0
+        //mainMenuTitle.fontName = "AvenirNext-Bold"
+        mainMenuTitle.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - 100.0)
+        mainMenuTitle.fontColor = UIColor.white
+        self.addChild(mainMenuTitle)
+    }
+    
+    
     
 }

@@ -10,9 +10,8 @@ import SpriteKit
 import GameplayKit
 
 class GameScene: SKScene {
+
     
-    var mainMenuTitle: SKLabelNode!
-    var logo: SKShapeNode!
     
     let firstNode = SKNode()
     let nonTexturedSpriteNodeFirst = SKSpriteNode()
@@ -63,22 +62,11 @@ class GameScene: SKScene {
     }
     
     func createShapes(){
-        logo = SKShapeNode(rectOf: CGSize(width: 100, height:100))
-        logo.fillColor = SKColor.red
-        logo.fillTexture = SKTexture(imageNamed: "logo")
-        logo.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - 300.0)
-        self.addChild(logo)
-        
+
     }
     
     func createText(){
-        mainMenuTitle = SKLabelNode()
-        mainMenuTitle.text = "Balls To The Wall"
-        mainMenuTitle.fontSize = 32.0
-        //mainMenuTitle.fontName = "AvenirNext-Bold"
-        mainMenuTitle.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - 100.0)
-        mainMenuTitle.fontColor = UIColor.white
-        self.addChild(mainMenuTitle)
+ 
     }
     
     func texturedSKSpriteNodes(){
