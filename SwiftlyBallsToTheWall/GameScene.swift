@@ -12,10 +12,13 @@ import GameplayKit
 class GameScene: SKScene {
 
     
+    //nodes
     
     var gameBall: SKSpriteNode!
     var wheel: SKSpriteNode!
     
+    //game values
+
     var score: SKLabelNode!
     var currentScore: Int = 0
     var fallSpeed: Double = 10.0
@@ -29,6 +32,8 @@ class GameScene: SKScene {
     var rotTrack: Int = 0
     var colorTrack: Int = 0
     
+    //constants
+
     let speedIncrease: Double = 0.9
     
     let rotateRightAction = SKAction.rotate(byAngle: CGFloat((Float.pi * 90)/180), duration: 0.3)
@@ -43,10 +48,10 @@ class GameScene: SKScene {
     
     
     override func didMove(to view: SKView){
-        createText()
-        createSprites()
+        createText() //create text nodes
+        createSprites() //create sprite nodes
         
-        gameStart()
+        gameStart() //initalize game values
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -82,9 +87,10 @@ class GameScene: SKScene {
     
     override func update(_ currentTime: TimeInterval) {
         
-        if (gameOver){
-            if (!gameOverLock && fadeLock && !gameBall.hasActions()){
-                let newScene = MainMenuScene(size: (self.view?.bounds.size)!)
+        if (gameOver){ //when the player has lost the game
+            if (!gameOverLock && fadeLock && !gameBall.hasActions()){ //after some time has passed
+                //go to the mainmenu scene
+                let newScene = MainMenuScene(size: (self.view?.bounds.size)!) 
                 let transition = SKTransition.reveal(with: .up, duration: 2)
                 self.view?.presentScene(newScene, transition: transition)
                 transition.pausesOutgoingScene = true
@@ -92,26 +98,32 @@ class GameScene: SKScene {
             }
         }
         
+        //when the ball is inside the center of the ring
         if (gameBall.position.y == (self.frame.minY + 150)){
             if (!fadeLock){
+                //make the ball fade out
                 fadeLock = true
                 gameBall.run(ballFadeOut)
                 pickBallColor()
                 fallSpeed = fallSpeed * speedIncrease
             }
             if (!gameBall.hasActions()){
+                //if we matched the color reset the ball position
                 if (colorMatched){
                     gameBall.position.y = self.frame.maxY - 200
                 }
             }
         }
+        //once we are in the middle of a segment
         else if (gameBall.position.y < 250){
             if (!inLock){
+                //if we matched with the correct color
                 if (rotTrack == colorTrack){
                     colorMatched = true
                     currentScore = currentScore + 1
                     score.text = String(currentScore)
                 }
+                //if we did not match with the correct color gameover
                 else{
                     UserDefaults.standard.set(currentScore, forKey: "roundScore")
                     score.text = "Gameover\nScore: " + String(currentScore)
@@ -126,6 +138,7 @@ class GameScene: SKScene {
                 
             }
         }
+        //move the ball down
         else{
             inLock = false
             if (fadeLock){
@@ -136,6 +149,7 @@ class GameScene: SKScene {
         }
     }
     
+    //tracks the rotation of the ring so that we can tell which color is up
     func trackRotation(dir: Int){
         rotTrack = rotTrack + dir
         if (rotTrack < 0){
@@ -146,6 +160,7 @@ class GameScene: SKScene {
         }
     }
     
+    //Pick a random color for the ball
     func pickBallColor(){
         let number = Int.random(in: 0 ... 3)
         if (number == 0){
@@ -163,23 +178,29 @@ class GameScene: SKScene {
         colorTrack = number
     }
     
+    //Initalize the game
     func gameStart(){
         gameBall.run(SKAction.moveTo(y: CGFloat(self.frame.minY + 150), duration: fallSpeed))
         pickBallColor()
-        score.numberOfLines = 0
-    }
+        score.numberOfLines = 0 //allow the text to have multiple lines
+     }
     
+    //create sprite nodes
     func createSprites(){
+        //create the ring
         wheel = SKSpriteNode(texture: SKTexture(imageNamed: "circle"), size: CGSize(width: 250, height: 250))
         wheel.position = CGPoint(x: self.frame.midX, y: self.frame.minY + 150)
         self.addChild(wheel)
         
+        //create the ball
         gameBall = SKSpriteNode(texture: SKTexture(imageNamed: "ball"), size: CGSize(width: 50, height: 50))
         gameBall.position = CGPoint(x: self.frame.midX, y: self.frame.maxY - 200)
         self.addChild(gameBall)
     }
     
+    //create text nodes
     func createText(){
+        //create the score text
         score = SKLabelNode()
         score.text = "0"
         score.fontSize = 32.0

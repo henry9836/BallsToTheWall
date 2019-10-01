@@ -11,7 +11,7 @@ import GameplayKit
 
 class MainMenuScene: SKScene {
     
-    
+    //nodes
     var logo: SKSpriteNode!
     var mainMenuTitle: SKLabelNode!
     var tapToPlay: SKLabelNode!
@@ -20,12 +20,12 @@ class MainMenuScene: SKScene {
     
     
     override func didMove(to view: SKView){
-        //self.backgroundColor = UIColor.gray
-        createText()
-        createShapes()
+        createText() //Create Text Nodes
+        createShapes() //Create Shape Nodes
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        //Transition to game scene
         let newScene = GameScene(size: (self.view?.bounds.size)!)
         let transition = SKTransition.reveal(with: .up, duration: 2)
         self.view?.presentScene(newScene, transition: transition)
@@ -33,12 +33,14 @@ class MainMenuScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        //make logo spin
         if (!logo.hasActions()){
             logo.run(SKAction.rotate(byAngle: -1/5, duration: 1))
         }
     }
     
     func createShapes(){
+        //create logo
         logo = SKSpriteNode(texture: SKTexture(imageNamed: "logo"), size: CGSize(width: 800, height: 800))
         logo.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         self.addChild(logo)
@@ -46,6 +48,7 @@ class MainMenuScene: SKScene {
     }
     
     func createText(){
+        //create title
         mainMenuTitle = SKLabelNode()
         mainMenuTitle.text = "Balls To The Wall"
         mainMenuTitle.fontSize = 32.0
@@ -54,26 +57,26 @@ class MainMenuScene: SKScene {
         mainMenuTitle.fontColor = UIColor.white
         self.addChild(mainMenuTitle)
         
+        //create instuction
         mainMenuTitle = SKLabelNode()
         mainMenuTitle.text = "Tap To Start"
         mainMenuTitle.fontSize = 15.0
-        //mainMenuTitle.fontName = "AvenirNext-Bold"
         mainMenuTitle.position = CGPoint(x: self.frame.midX, y: self.frame.midY-50)
         mainMenuTitle.fontColor = UIColor.white
         self.addChild(mainMenuTitle)
         
+        //create highscore text
         mainMenuTitle = SKLabelNode()
-        mainMenuTitle.text = "HighScore: " + String(UserDefaults.standard.integer(forKey: "highScore"))
+        mainMenuTitle.text = "HighScore: " + String(UserDefaults.standard.integer(forKey: "highScore")) //retrieve highscore from storage
         mainMenuTitle.fontSize = 25.0
-        //mainMenuTitle.fontName = "AvenirNext-Bold"
         mainMenuTitle.position = CGPoint(x: self.frame.midX, y: self.frame.midY)
         mainMenuTitle.fontColor = UIColor.white
         self.addChild(mainMenuTitle)
         
+        //create previous score text
         mainMenuTitle = SKLabelNode()
-        mainMenuTitle.text = "Previous Game's Score: " + String(UserDefaults.standard.integer(forKey: "roundScore"))
+        mainMenuTitle.text = "Previous Game's Score: " + String(UserDefaults.standard.integer(forKey: "roundScore")) //retrieve score from storage
         mainMenuTitle.fontSize = 13.0
-        //mainMenuTitle.fontName = "AvenirNext-Bold"
         mainMenuTitle.position = CGPoint(x: self.frame.midX, y: self.frame.midY - 75)
         mainMenuTitle.fontColor = UIColor.white
         self.addChild(mainMenuTitle)
